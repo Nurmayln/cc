@@ -1,5 +1,5 @@
 # cc
-# 📌 Praktikum 02 - Membuat API Sederhana dengan Flask
+# Praktikum 02 - Membuat API Sederhana dengan Flask
 
 ---
 
@@ -8,7 +8,7 @@
 ### 1️⃣ Masuk ke Direktori Backend
 
 ```sh
-cd cloud-project/backend
+cd backend
 ```
 
 ### 2️⃣ Membuat Virtual Environment
@@ -23,18 +23,6 @@ python -m venv venv
 
 ```sh
 venv\Scripts\activate
-```
-
-Jika menggunakan PowerShell dan ada error terkait izin eksekusi, jalankan:
-
-```sh
-Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
-```
-
-**Untuk Linux/MacOS:**
-
-```sh
-source venv/bin/activate
 ```
 
 ### 4️⃣ Menginstal Flask
@@ -84,40 +72,6 @@ Buka browser dan akses:
 - [http://localhost:5000/](http://localhost:5000/)
 
 ---
-
-## 📂 Struktur Direktori yang Direkomendasikan (Opsional)
-
-```
-backend/
-├─ venv/
-├─ app.py
-├─ requirements.txt
-└─ ...
-```
-
-### 7️⃣ Membuat `requirements.txt` (Opsional)
-
-Simpan daftar library yang dibutuhkan untuk mempermudah instalasi di lingkungan lain:
-
-```sh
-pip freeze > requirements.txt
-```
-
-Contoh isi `requirements.txt`:
-
-```
-Flask==3.1.0
-Jinja2==3.1.5
-Werkzeug==3.1.3
-click==8.1.8
-itsdangerous==2.2.0
-```
-
-Untuk menginstal semua dependensi yang tercantum di `requirements.txt`:
-
-```sh
-pip install -r requirements.txt
-```
 
 ---
 
