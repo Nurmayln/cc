@@ -96,7 +96,7 @@ atau hentikan proses yang menggunakan port 5000.
 ### 1️⃣ Membuat Proyek React dengan Vite
 
 ```sh
-cd ../frontend
+cd frontend
 npm create vite@latest my-react-app -- --template react
 cd my-react-app
 npm install
@@ -169,4 +169,6 @@ echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo s
 🔴 **Blank screen** ➜ Periksa kesalahan sintaks di file React (misalnya, lupa menutup tanda kurung `}`).
 
 ---
+
+
 
