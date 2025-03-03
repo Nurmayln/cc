@@ -1,5 +1,7 @@
-# cc
-#📌 Praktikum 02 - Membuat API Sederhana dengan Flask 
+# Cloud Computing
+
+## 📌 Praktikum 02 - Membuat API Sederhana dengan Flask
+
 ---
 
 ## 🛠️ Langkah-Langkah Praktikum
@@ -71,11 +73,10 @@ Buka browser dan akses:
 - [http://localhost:5000/](http://localhost:5000/)
 
 ---
----
 
 ## 🛠️ Troubleshooting
 
-🔴 **Error 'Module not found'** ➜ Pastikan virtual environment sudah diaktifkan.\
+🔴 **Error 'Module not found'** ➜ Pastikan virtual environment sudah diaktifkan.
 🔴 **Port 5000 sudah digunakan** ➜ Jalankan Flask dengan port lain:
 
 ```sh
@@ -86,7 +87,7 @@ atau hentikan proses yang menggunakan port 5000.
 
 ---
 
-#📌 Praktikum 03 - Membuat Aplikasi Frontend Sederhana dengan React + Vite
+## 📌 Praktikum 03 - Membuat Aplikasi Frontend Sederhana dengan React + Vite
 
 ---
 
@@ -168,6 +169,4 @@ echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo s
 🔴 **Blank screen** ➜ Periksa kesalahan sintaks di file React (misalnya, lupa menutup tanda kurung `}`).
 
 ---
-
-
 
