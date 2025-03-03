@@ -1,6 +1,5 @@
 # cc
-# Praktikum 02 - Membuat API Sederhana dengan Flask
-
+#📌 Praktikum 02 - Membuat API Sederhana dengan Flask 
 ---
 
 ## 🛠️ Langkah-Langkah Praktikum
@@ -72,7 +71,6 @@ Buka browser dan akses:
 - [http://localhost:5000/](http://localhost:5000/)
 
 ---
-
 ---
 
 ## 🛠️ Troubleshooting
@@ -85,6 +83,89 @@ python app.py --port=5001
 ```
 
 atau hentikan proses yang menggunakan port 5000.
+
+---
+
+#📌 Praktikum 03 - Membuat Aplikasi Frontend Sederhana dengan React + Vite
+
+---
+
+## 🛠️ Langkah-Langkah Praktikum
+
+### 1️⃣ Membuat Proyek React dengan Vite
+
+```sh
+cd ../frontend
+npm create vite@latest my-react-app -- --template react
+cd my-react-app
+npm install
+npm run dev
+```
+
+Setelah menjalankan `npm run dev`, salin URL lokal (misalnya, `http://127.0.0.1:5173/`) dari terminal dan buka di browser.
+
+---
+
+### 2️⃣ Struktur Direktori React + Vite
+
+```
+frontend/
+└─ my-react-app/
+    ├─ src/
+    ├─ public/
+    ├─ package.json
+    ├─ vite.config.js
+    └─ ...
+```
+
+---
+
+### 3️⃣ Membuat Halaman Sederhana
+
+Buka `src/App.jsx` dan ganti konten default dengan:
+
+```jsx
+import React from 'react';
+
+function App() {
+  return (
+    <div style={{ textAlign: 'center', marginTop: '50px' }}>
+      <h1>Hello from React + Vite!</h1>
+      <p>This is a simple React app built with Vite.</p>
+    </div>
+  );
+}
+
+export default App;
+```
+
+---
+
+### 4️⃣ Menjalankan Aplikasi React + Vite
+
+```sh
+npm run dev
+```
+
+Pastikan terminal menampilkan informasi seperti:
+
+```
+Local: http://127.0.0.1:5173/
+```
+
+Akses aplikasi di browser menggunakan URL tersebut.
+
+---
+
+## 🔧 Troubleshooting Tips
+
+🔴 **Error ENOSPC (terkait watcher limit)**
+
+```sh
+echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+```
+
+🔴 **Blank screen** ➜ Periksa kesalahan sintaks di file React (misalnya, lupa menutup tanda kurung `}`).
 
 ---
 
