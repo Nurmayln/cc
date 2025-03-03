@@ -107,21 +107,9 @@ Setelah menjalankan `npm run dev`, salin URL lokal (misalnya, `http://127.0.0.1:
 
 ---
 
-### 2️⃣ Struktur Direktori React + Vite
-
-```
-frontend/
-└─ my-react-app/
-    ├─ src/
-    ├─ public/
-    ├─ package.json
-    ├─ vite.config.js
-    └─ ...
-```
-
 ---
 
-### 3️⃣ Membuat Halaman Sederhana
+### 2️⃣  Membuat Halaman Sederhana
 
 Buka `src/App.jsx` dan ganti konten default dengan:
 
@@ -142,7 +130,7 @@ export default App;
 
 ---
 
-### 4️⃣ Menjalankan Aplikasi React + Vite
+### 3️⃣ Menjalankan Aplikasi React + Vite
 
 ```sh
 npm run dev
@@ -169,6 +157,7 @@ echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo s
 🔴 **Blank screen** ➜ Periksa kesalahan sintaks di file React (misalnya, lupa menutup tanda kurung `}`).
 
 ---
+
 
 
 
