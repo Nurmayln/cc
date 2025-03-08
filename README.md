@@ -74,7 +74,7 @@ Buka browser dan akses:
 
 ---
 
-## 🛠️ Troubleshooting
+## 🔧 Troubleshooting
 
 🔴 **Error 'Module not found'** ➜ Pastikan virtual environment sudah diaktifkan.
 🔴 **Port 5000 sudah digunakan** ➜ Jalankan Flask dengan port lain:
@@ -163,6 +163,141 @@ echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo s
 🔴 **Blank screen** ➜ Periksa kesalahan sintaks di file React (misalnya, lupa menutup tanda kurung `}`).
 
 ---
+## 📌 Praktikum 04 - Menghubungkan React ke Flask
+
+---
+
+## 🛠️ Langkah-Langkah Praktikum
+
+### 1️⃣ Menyiapkan Backend dengan Flask
+
+Pastikan Anda telah menginstal Python dan membuat virtual environment sebelum menjalankan perintah berikut:
+
+```sh
+cd backend
+python -m venv venv
+.env\Scripts\activate  # Untuk Windows
+pip install flask flask-cors
+```
+
+Buat file `backend/app.py` dan tambahkan kode berikut:
+
+```python
+from flask import Flask, jsonify
+from flask_cors import CORS  # Mengatasi masalah CORS
+
+app = Flask(__name__)
+CORS(app)
+
+@app.route('/')
+def home():
+    return jsonify({"message": "Hello from Flask!"})
+
+@app.route('/api/data')
+def get_data():
+    return jsonify({"data": "Hello from Flask API"})
+
+if __name__ == '__main__':
+    app.run(debug=True, host='0.0.0.0', port=5000)
+```
+
+Jalankan backend dengan perintah:
+
+```sh
+python backend/app.py
+```
+
+Buka browser dan akses:
+
+```
+http://localhost:5000/api/data
+```
+
+Jika berhasil, Anda akan melihat JSON:
+
+```json
+{"data": "Hello from Flask API"}
+```
+
+---
+
+### 2️⃣ Menyiapkan Frontend dengan React
+
+Pindah ke direktori frontend dan buat proyek React:
+
+```sh
+cd frontend
+npm create vite@latest my-react-app -- --template react
+cd my-react-app
+npm install
+```
+
+Buka `src/App.jsx` dan ubah menjadi:
+
+```jsx
+import React, { useState, useEffect } from 'react';
+
+function App() {
+    const [apiData, setApiData] = useState(null);
+
+    useEffect(() => {
+        fetch('http://localhost:5000/api/data')
+            .then(response => response.json())
+            .then(data => setApiData(data.data))
+            .catch(error => console.error('Error fetching data:', error));
+    }, []);
+
+    return (
+        <div style={{ textAlign: 'center', marginTop: '50px' }}>
+            <h1>React & Flask Integration</h1>
+            <p>{apiData ? apiData : "Loading data..."}</p>
+        </div>
+    );
+}
+
+export default App;
+```
+
+---
+
+### 3️⃣ Menjalankan Aplikasi React
+
+```sh
+npm run dev
+```
+
+Pastikan terminal menampilkan informasi seperti:
+
+```
+Local: http://127.0.0.1:5173/
+```
+
+Buka URL tersebut di browser untuk melihat hasilnya.
+
+---
+
+## 🖼️ Hasil Tampilan
+
+Tampilan yang seharusnya muncul di browser:
+
+
+
+---
+
+## 🔧 Troubleshooting Tips
+
+🔴 **Flask tidak merespons di React (CORS error)**
+
+Pastikan Flask-CORS sudah diinstal dan `CORS(app)` sudah ditambahkan di `app.py`.
+
+```sh
+pip install flask-cors
+```
+
+🔴 **React tidak menampilkan data**
+
+- Periksa apakah backend berjalan dengan benar dengan membuka `http://localhost:5000/api/data` di browser.
+- Pastikan Anda menggunakan `npm run dev` di React, bukan `npm start`.
 
 
 
