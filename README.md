@@ -299,32 +299,44 @@ pip install flask-cors
 - Periksa apakah backend berjalan dengan benar dengan membuka `http://localhost:5000/api/data` di browser.
 - Pastikan Anda menggunakan `npm run dev` di React, bukan `npm start`.
 
-📌 Praktikum 05 - Integrasi Flask dengan PostgreSQL
+## 📌 Praktikum 05 - Integrasi Flask dengan PostgreSQL
 
-🛠️ Langkah-Langkah Praktikum
+---
 
-1️⃣ Instalasi Psycopg2 (Untuk Koneksi ke PostgreSQL)
+## 🛠️ Langkah-Langkah Praktikum
 
+### 1️⃣ Instalasi Psycopg2 (Untuk Koneksi ke PostgreSQL)
+
+Jalankan perintah berikut untuk menginstal **psycopg2-binary**:
+
+```sh
 pip install psycopg2-binary
+```
 
-2️⃣ Menyiapkan Database di pgAdmin Desktop
+---
 
-Buat Database baru dengan contoh test_db lalu kemudian buat user baru.
+### 2️⃣ Menyiapkan Database di pgAdmin Desktop
 
-3️⃣ Membuat Table Baru
+1. Buka **pgAdmin**.
+2. Buat database baru dengan nama **test_db**.
+3. Buat user baru sesuai kebutuhan.
+4. Jalankan perintah SQL berikut untuk membuat tabel:
 
-Jalankan perintah berikut untuk membuat tabel baru:
-
+```sql
 CREATE TABLE IF NOT EXISTS items (
   id SERIAL PRIMARY KEY,
   name VARCHAR(100),
   description TEXT
 );
+```
 
-4️⃣ Menambahkan Fungsi CRUD pada Flask
+---
 
-Tambahkan kode berikut ke dalam aplikasi Flask:
+### 3️⃣ Menambahkan Fungsi CRUD di Flask
 
+Tambahkan kode berikut ke dalam aplikasi Flask Anda untuk mengimplementasikan fungsi **GET** dan **POST**:
+
+```python
 from flask import Flask, request, jsonify
 import psycopg2
 
@@ -332,7 +344,10 @@ app = Flask(__name__)
 
 def get_db_connection():
     conn = psycopg2.connect(
-        dbname='test_db', user='your_user', password='your_password', host='localhost'
+        dbname='test_db',
+        user='your_user',
+        password='your_password',
+        host='localhost'
     )
     return conn
 
@@ -344,7 +359,7 @@ def get_items():
     rows = cur.fetchall()
     cur.close()
     conn.close()
-
+    
     items = [{"id": row[0], "name": row[1], "description": row[2]} for row in rows]
     return jsonify(items)
 
@@ -353,7 +368,7 @@ def create_item():
     data = request.json
     name = data['name']
     description = data['description']
-
+    
     conn = get_db_connection()
     cur = conn.cursor()
     cur.execute("INSERT INTO items (name, description) VALUES (%s, %s) RETURNING id;", (name, description))
@@ -361,25 +376,46 @@ def create_item():
     conn.commit()
     cur.close()
     conn.close()
-
+    
     return jsonify({"id": new_id, "name": name, "description": description}), 201
 
-5️⃣ Menjalankan Flask
+if __name__ == '__main__':
+    app.run(debug=True)
+```
 
+---
+
+### 4️⃣ Menjalankan Flask
+
+Jalankan aplikasi Flask dengan perintah:
+
+```sh
 python app.py
+```
 
-6️⃣ Menggunakan Postman untuk Menguji Endpoint
+Aplikasi akan berjalan di **http://127.0.0.1:5000/**.
 
-Gunakan Postman untuk mengakses endpoint:
+---
 
-GET: http://localhost:5000/api/items ➜ Mengambil semua data.
+### 5️⃣ Menguji Endpoint dengan Postman
 
-POST: http://localhost:5000/api/items ➜ Menambahkan data baru dengan JSON body:
+Gunakan **Postman** untuk mengetes endpoint:
 
-{
-  "name": "Item 1",
-  "description": "Deskripsi item 1"
-}
+- **GET**: `http://127.0.0.1:5000/api/items`
+- **POST**: `http://127.0.0.1:5000/api/items`
+  - Body (JSON):
+  ```json
+  {
+    "name": "Example Item",
+    "description": "This is an example description."
+  }
+  ```
+
+Jika berhasil, Anda akan mendapatkan respons JSON sesuai dengan data yang dimasukkan.
+
+---
+
+
 
 
 
