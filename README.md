@@ -415,6 +415,95 @@ Jika berhasil, Anda akan mendapatkan respons JSON sesuai dengan data yang dimasu
 
 ---
 
+# 📌 Praktikum 06 - Dockerization Bagian 1 (Membuat Dockerfile untuk Flask)
+
+## 🛠️ Langkah-Langkah Praktikum
+
+### 1️⃣ Persiapan Awal
+
+Pastikan **Docker Desktop** telah berjalan sebelum menjalankan perintah Docker. Cek dengan perintah berikut:
+
+```sh
+docker info
+```
+
+Jika Docker belum berjalan, kemungkinan akan muncul error seperti ini:
+
+```sh
+ERROR: error during connect: Get "http://%2F%2F.%2Fpipe%2FdockerDesktopLinuxEngine/v1.47/info": open //./pipe/dockerDesktopLinuxEngine: The system cannot find the file specified.
+```
+
+✅ **Cara Menjalankan Docker Desktop:**
+
+1. **Buka aplikasi Docker Desktop** 🐳
+2. **Tunggu hingga status "Docker is running" muncul** ✅
+
+---
+
+### 2️⃣ Membuat Dockerfile
+
+Buat file `Dockerfile` di dalam folder `backend` dengan isi sebagai berikut:
+
+```dockerfile
+# backend/Dockerfile
+FROM python:3.9-slim
+
+WORKDIR /app
+
+COPY requirements.txt requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . .
+
+EXPOSE 5000
+CMD ["python", "app.py"]
+```
+
+---
+
+### 3️⃣ Menyiapkan requirements.txt
+
+Tambahkan isi berikut ke file `requirements.txt`:
+
+```
+flask
+flask-cors
+psycopg2-binary
+```
+
+---
+
+### 4️⃣ Membangun Docker Image 🏗️
+
+Jalankan perintah berikut di dalam folder `backend`:
+
+```sh
+cd backend
+docker build -t flask-backend:1.0 .
+```
+
+---
+
+### 5️⃣ Menjalankan Docker Container 🚀
+
+Setelah image berhasil dibuat, jalankan container dengan perintah:
+
+```sh
+docker run -d -p 5000:5000 --name flask-container flask-backend:1.0
+```
+
+---
+
+### 6️⃣ Verifikasi di Browser 🌐
+
+Cek apakah API Flask berjalan dengan mengakses:
+
+🔗 [http://localhost:5000](http://localhost:5000)
+
+---
+
+##
+
 
 
 
