@@ -504,6 +504,74 @@ Cek apakah API Flask berjalan dengan mengakses:
 
 ##
 
+# Praktikum 07 - Dockerization Bagian 2 (Membuat Dockerfile untuk React dengan Vite)
+
+## 🛠️ Langkah-Langkah Praktikum
+
+### 1️⃣ Persiapan Awal
+
+- Pastikan Docker Desktop sudah berjalan.
+- Jalankan `docker info` untuk memastikan Docker berjalan dengan baik.
+- Jika terdapat error terkait Docker Desktop, pastikan aplikasi sudah dijalankan.
+
+### 2️⃣ Membuat Dockerfile
+
+Buat file `Dockerfile` pada folder `frontend/my-react-app/` dengan isi sebagai berikut:
+
+```dockerfile
+# Gunakan Node.js untuk build React
+FROM node:14-alpine AS builder
+
+WORKDIR /app
+
+COPY package*.json ./
+RUN npm install
+
+COPY . .
+RUN npm run build
+
+# Gunakan Nginx untuk serve static file
+FROM nginx:stable-alpine
+COPY --from=builder /app/dist /usr/share/nginx/html
+
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
+```
+
+### 3️⃣ Build Docker Image
+
+Sebelum membangun image, jalankan perintah berikut untuk memastikan aplikasi sudah ter-build:
+
+```sh
+npm run build
+```
+
+Lalu bangun image Docker dengan perintah:
+
+```sh
+cd frontend/my-react-app
+docker build -t react-frontend-vite:1.0 .
+```
+
+### 4️⃣ Menjalankan Container
+
+Setelah image berhasil dibuat, jalankan container dengan perintah:
+
+```sh
+docker run -d -p 3000:80 --name react-container-vite react-frontend-vite:1.0
+```
+
+### 5️⃣ Verifikasi di Browser
+
+Buka browser dan akses `http://localhost:3000` untuk memastikan aplikasi berjalan dengan baik.
+
+## 🔧 Troubleshooting Tips
+
+- **Out of Memory**: Pastikan sistem memiliki RAM yang cukup karena build React bisa memakan banyak memori.
+- **File Not Found**: Pastikan Anda berada di direktori `my-react-app` sebelum menjalankan perintah `docker build`.
+- **Port Konflik**: Jika port 3000 sudah digunakan, ubah port yang dipetakan, misalnya `-p 4000:80`.
+- **Folder ****************`dist`**************** Tidak Ada**: Pastikan `npm run build` telah dijalankan dan menghasilkan folder `dist`. Jika tidak, cek konfigurasi Vite di proyek Anda.
+
 
 
 
